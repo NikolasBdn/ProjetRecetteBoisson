@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use \Illuminate\Database\Capsule\Manager as DB;
 
-require __DIR__ . 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 // instance de la base de données
 $db = new DB();
@@ -39,13 +39,3 @@ $app->get('/', function (Request $request, Response $response, $args) {
 
 // demarais le routeur
 $app->run();
-
-//require('controller.php');
-//
-//if (isset($_GET['action'])) {
-//  if ($_GET['action'] == 'listRecipes' && isset($_GET['level'])) {
-//    recipiesHierarchy();
-//  }
-//}else {
-//  index();
-//}
