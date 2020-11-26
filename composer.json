@@ -1,5 +1,13 @@
 {
     "require": {
-        "slim/slim": "4.0"
+        "illuminate/database": "5.5.*",
+        "slim/slim": "4.0",
+        "php": ">=7.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "boisson\\": "./src"
+        }
     }
 }
