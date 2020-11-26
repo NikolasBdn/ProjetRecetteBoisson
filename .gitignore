@@ -1,6 +1,6 @@
 # ide
 .idea
-
+.phar
 # composer
 composer.lock
 vendor
