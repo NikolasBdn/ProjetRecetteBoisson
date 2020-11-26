@@ -4,3 +4,5 @@
 # composer
 composer.lock
 vendor
+# private data
+src/conf/conf.ini
