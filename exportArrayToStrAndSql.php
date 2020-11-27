@@ -2,14 +2,71 @@
 
 require('Donnees.inc.php');
 
+
+function ingredientDataGenerator($hierarchie) {
+    $out = array();
+    foreach ($hierarchie as $key => $value) {
+        array_push($out, $key);
+    }
+    return $out;
+}
+
+function recetteDataGenerator($recettes) {
+    $out = array();
+    foreach ($recettes as $key => $value) {
+        $data = array();
+        $data["title"] = $value["titre"];
+        $data["ingredientsText"] = $value["ingredients"];
+        $data["preparation"] = $value["preparation"];
+        array_push($out, $data);
+    }
+    return $out;
+}
+
+function createSql($tableIngredient, $tableRecette) {
+    $out = <<<sql
+create table Recette (
+    id int,
+    title varchar(256),
+    ingredientsText varchar(1024),
+    preparation varchar(1024),
+    primary key (id)
+);
+
+create table Ingredient (
+    id int,
+    name varchar(128),
+    primary key (id)
+);
+sql;
+    $out .= "\n\n";
+
+    foreach ($tableIngredient as $key => $value) {
+        $val = str_replace ("'", "\\'", $value);
+        $out .= "insert into Ingredient values ($key, '$val');\n";
+    }
+    $out .= "\n";
+    foreach ($tableRecette as $key => $value) {
+        $title = str_replace ("'", "\\'", $value["title"]);
+        $ingredientsText = str_replace ("'", "\\'", $value["ingredientsText"]);
+        $preparation = str_replace ("'", "\\'", $value["preparation"]);
+        $out .= "insert into Recette values ($key, '$title', '$ingredientsText', '$preparation');\n";
+    }
+    return $out;
+}
+
 function readableRecettes($recettes) {
     $out = "<h1>Recettes</h1><ul>";
     foreach ($recettes as $key => $value) {
-        $out .= "<li>$key";
+        $out .= "<li>" . $value["titre"] . "<ul>";
+        $out .= "<li>" . $value["ingredients"] . "</li>";
+        $out .= "<li>" . $value["preparation"] . "</li>";
+        $out .= "<li>Index<ul>";
 
-        // TODO
+        foreach ($value["index"] as $element)
+            $out .= "<li>" . $element . "</li>";
 
-        $out .= "</li>\n";
+        $out .= "</ul></li></ul></li>\n";
     }
     return $out . "</ul>";
 }
@@ -38,4 +95,9 @@ function readableHierarchie($hierarchie) {
     return $out . "</ul>";
 }
 
-echo readableHierarchie($Hierarchie);
+//echo readableRecettes($Recettes);
+//echo readableHierarchie($Hierarchie);
+//echo createSql(ingredientDataGenerator($Hierarchie));
+//print_r(ingredientDataGenerator($Hierarchie));
+echo createSql(ingredientDataGenerator($Hierarchie), recetteDataGenerator($Recettes));
+
