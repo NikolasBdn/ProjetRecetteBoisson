@@ -27,6 +27,7 @@ $db->bootEloquent();
 // Creation du route slim
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
+include 'src/conf/config.php';
 
 // gestion des erreurs
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
