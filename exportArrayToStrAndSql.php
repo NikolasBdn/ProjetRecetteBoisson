@@ -31,12 +31,12 @@ function hierarchieDataGenerator($hierarchie) {
     foreach ($hierarchie as $key => $value) {
         if (isset($value["sous-categorie"])) {
             foreach ($value["sous-categorie"] as $subCat) {
-                $outSubCat[array_search($key, $tableIngredient)] = array_search($subCat, $tableIngredient);
+                array_push($outSubCat, array(array_search($key, $tableIngredient) => array_search($subCat, $tableIngredient)));
             }
         }
         if (isset($value["super-categorie"])) {
             foreach ($value["super-categorie"] as $supCat) {
-                $outSupCat[array_search($key, $tableIngredient)] = array_search($supCat, $tableIngredient);
+                array_push($outSupCat, array(array_search($key, $tableIngredient) => array_search($supCat, $tableIngredient)));
             }
         }
     }
