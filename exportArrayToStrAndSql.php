@@ -91,13 +91,15 @@ create table RecetteUse (
 create table Subcategory (
     id_ingredient_master int,
     id_ingredient_slave int,
-    constraint fk_ingredient_sub_category foreign key (id_ingredient_master, id_ingredient_slave) references Recette(id)
+    constraint fk_ingredient_master_sub_category foreign key (id_ingredient_master) references Ingredient(id),
+    constraint fk_ingredient_slave_sub_category foreign key (id_ingredient_slave) references Ingredient(id)
 );
 
 create table Supcategory (
     id_ingredient_master int,
     id_ingredient_slave int,
-    constraint fk_ingredient_sup_category foreign key (id_ingredient_master, id_ingredient_slave) references Recette(id)
+    constraint fk_ingredient_master_sup_category foreign key (id_ingredient_master) references Ingredient(id),
+    constraint fk_ingredient_slave_sup_category foreign key (id_ingredient_slave) references Ingredient(id)
 );
 
 sql;
