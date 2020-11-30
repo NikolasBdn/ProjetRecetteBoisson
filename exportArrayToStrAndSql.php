@@ -23,6 +23,29 @@ function recetteDataGenerator($recettes) {
     return $out;
 }
 
+function hierarchieDataGenerator($hierarchie) {
+    $tableIngredient = ingredientDataGenerator($hierarchie);
+
+    $outSubCat = array();
+    $outSupCat = array();
+    foreach ($hierarchie as $key => $value) {
+        if (isset($value["sous-categorie"])) {
+            foreach ($value["sous-categorie"] as $subCat) {
+                $outSubCat[array_search($key, $tableIngredient)] = array_search($subCat, $tableIngredient);
+            }
+        }
+        if (isset($value["super-categorie"])) {
+            foreach ($value["super-categorie"] as $supCat) {
+                $outSupCat[array_search($key, $tableIngredient)] = array_search($supCat, $tableIngredient);
+            }
+        }
+    }
+
+    return array("sous-categorie" => $outSubCat, "super-categorie" => $outSupCat);
+}
+
+
+
 function createSql($tableIngredient, $tableRecette) {
     $out = <<<sql
 create table Recette (
@@ -99,5 +122,7 @@ function readableHierarchie($hierarchie) {
 //echo readableHierarchie($Hierarchie);
 //echo createSql(ingredientDataGenerator($Hierarchie));
 //print_r(ingredientDataGenerator($Hierarchie));
-echo createSql(ingredientDataGenerator($Hierarchie), recetteDataGenerator($Recettes));
+//echo createSql(ingredientDataGenerator($Hierarchie), recetteDataGenerator($Recettes));
+print_r(hierarchieDataGenerator($Hierarchie));
+
 
