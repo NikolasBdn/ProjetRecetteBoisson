@@ -65,12 +65,12 @@ function multidimensional_array_search($field, $value, $array) {
 }
 
 
-function createSql($tableIngredient, $tableRecette) {
+function createSql($tableIngredient, $tableRecette, $tableRecetteUse, $tableHierarchie) {
     $out = <<<sql
 create table Recette (
     id int,
     title varchar(256),
-    ingredientsText varchar(1024),
+    ingredients_text varchar(1024),
     preparation varchar(1024),
     primary key (id)
 );
@@ -80,6 +80,26 @@ create table Ingredient (
     name varchar(128),
     primary key (id)
 );
+
+create table RecetteUse (
+    id_recette int,
+    id_ingredient int,
+    constraint fk_recette foreign key (id_recette) references Recette(id),
+    constraint fk_ingredient foreign key (id_ingredient) references Ingredient(id)
+);
+
+create table Subcategory (
+    id_ingredient_master int,
+    id_ingredient_slave int,
+    constraint fk_ingredient_sub_category foreign key (id_ingredient_master, id_ingredient_slave) references Recette(id)
+);
+
+create table Supcategory (
+    id_ingredient_master int,
+    id_ingredient_slave int,
+    constraint fk_ingredient_sup_category foreign key (id_ingredient_master, id_ingredient_slave) references Recette(id)
+);
+
 sql;
     $out .= "\n\n";
 
@@ -93,6 +113,24 @@ sql;
         $ingredientsText = str_replace ("'", "\\'", $value["ingredientsText"]);
         $preparation = str_replace ("'", "\\'", $value["preparation"]);
         $out .= "insert into Recette values ($key, '$title', '$ingredientsText', '$preparation');\n";
+    }
+    $out .= "\n";
+    foreach ($tableRecetteUse as $value) {
+        foreach ($value as $id_recette => $id_ingredient) {
+            $out .= "insert into RecetteUse values ($id_recette, $id_ingredient);\n";
+        }
+    }
+    $out .= "\n";
+    foreach ($tableHierarchie["sous-categorie"] as $value) {
+        foreach ($value as $id_ingredient_master => $id_ingredient_slave) {
+            $out .= "insert into Subcategory values ($id_ingredient_master, $id_ingredient_slave);\n";
+        }
+    }
+    $out .= "\n";
+    foreach ($tableHierarchie["super-categorie"] as $value) {
+        foreach ($value as $id_ingredient_master => $id_ingredient_slave) {
+            $out .= "insert into Supcategory values ($id_ingredient_master, $id_ingredient_slave);\n";
+        }
     }
     return $out;
 }
@@ -141,8 +179,9 @@ function readableHierarchie($hierarchie) {
 //echo readableHierarchie($Hierarchie);
 //echo createSql(ingredientDataGenerator($Hierarchie));
 //print_r(ingredientDataGenerator($Hierarchie));
-//echo createSql(ingredientDataGenerator($Hierarchie), recetteDataGenerator($Recettes));
 //print_r(hierarchieDataGenerator($Hierarchie));
-print_r(recetteUseDataGenerator($Recettes, $Hierarchie));
+//print_r(recetteUseDataGenerator($Recettes, $Hierarchie));
 //print_r(recetteDataGenerator($Recettes));
+
+echo createSql(ingredientDataGenerator($Hierarchie), recetteDataGenerator($Recettes), recetteUseDataGenerator($Recettes, $Hierarchie), hierarchieDataGenerator($Hierarchie));
 
