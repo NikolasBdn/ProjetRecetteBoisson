@@ -19,11 +19,11 @@ class Ingredient extends Model
 
     public function sub_categorys()
     {
-        return $this->belongsToMany(Recette::class, 'Subcategory', 'id_ingredient_master', 'id_ingredient_slave', 'id', 'id');
+        return $this->belongsToMany(Ingredient::class, 'Subcategory', 'id_ingredient_master', 'id_ingredient_slave', 'id', 'id');
     }
 
     public function sup_categorys()
     {
-        return $this->belongsToMany(Recette::class, 'Supcategory', 'id_ingredient_master', 'id_ingredient_slave', 'id', 'id');
+        return $this->belongsToMany(Ingredient::class, 'Supcategory', 'id_ingredient_master', 'id_ingredient_slave', 'id', 'id');
     }
 }
