@@ -16,4 +16,14 @@ class Ingredient extends Model
     {
         return $this->belongsToMany(Recette::class, 'RecetteUse', 'id_ingredient', 'id_recette', 'id', 'id');
     }
+
+    public function sub_categorys()
+    {
+        return $this->belongsToMany(Recette::class, 'Subcategory', 'id_ingredient_master', 'id_ingredient_slave', 'id', 'id');
+    }
+
+    public function sup_categorys()
+    {
+        return $this->belongsToMany(Recette::class, 'Supcategory', 'id_ingredient_master', 'id_ingredient_slave', 'id', 'id');
+    }
 }
