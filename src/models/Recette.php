@@ -12,8 +12,8 @@ class Recette extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    public function listIngredient()
+    public function ingredients()
     {
-        return $this->hasMany('boisson\models\RecetteUse','id_recette')->with('ingredients');
+        return $this->belongsToMany(Ingredient::class, 'RecetteUse', 'id_recette', 'id_ingredient', 'id', 'id');
     }
 }

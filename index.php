@@ -30,10 +30,9 @@ $app->addRoutingMiddleware();
 //include 'src/conf/config.php';
 
 
-$ingredients = \boisson\models\Recette::where('id', '=', 0)->first()->listIngredient()->get();
-print_r($ingredients);
+$ingredients = \boisson\models\Recette::where('id', '=', 0)->first()->ingredients()->get();
 foreach ($ingredients as $ingredient) {
-    echo $ingredient->title;
+    echo $ingredient->name . "\n";
 }
 
 // gestion des erreurs
