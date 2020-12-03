@@ -27,7 +27,6 @@ $db->bootEloquent();
 // Creation du route slim
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
-//include 'src/conf/config.php';
 
 
 $ingredients = \boisson\models\Recette::where('id', '=', 0)->first()->ingredients()->get();
