@@ -5,4 +5,4 @@
 composer.lock
 vendor
 # private data
-src/conf/*
+src/conf/
