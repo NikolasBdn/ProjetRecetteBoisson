@@ -5,15 +5,16 @@ namespace boisson\controllers;
 
 
 use boisson\models\Recette;
+use boisson\views\RecipeView;
 
 class RecipeController
 {
-    public static function recipe($id, $app) {
-        $ingredients = Recette::where('id', '=', $id)->first()->ingredients()->get();
-        foreach ($ingredients as $ingredient) {
-            echo $ingredient->name . "\n";
-        }
-
-        return "";
+    public static function recipe($app, $id) {
+        $recipe = Recette::where('id', '=', $id)->first();
+        $arg = array(
+            'recipe' => $recipe,
+            'ingredient' => $recipe->ingredients()->get()
+        );
+        return RecipeView::render($app, $arg);
     }
 }

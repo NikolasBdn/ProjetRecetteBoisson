@@ -7,12 +7,12 @@ namespace boisson\views;
 class ViewRendering
 {
 
-    private static function render1(array $content)
+    private static function render1($content)
     {
         return self::render2($content['body'], $content['title']);
     }
 
-    private static function render2(string $body, string $title)
+    private static function render2($body, $title)
     {
         $template = file_get_contents('./src/views/template.html');
 

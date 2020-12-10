@@ -30,12 +30,6 @@ $db->bootEloquent();
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
 
-// Temporary test
-$ingredients = \boisson\models\Recette::where('id', '=', 0)->first()->ingredients()->get();
-foreach ($ingredients as $ingredient) {
-    echo $ingredient->name . "\n";
-}
-
 // gestion des erreurs
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
