@@ -23,6 +23,10 @@ class RecipeView
         $url = 'img/' . str_replace(' ', '_', $contentArray['title']) . '.jpg';
         if(file_exists('./' . $url)) $content .= "<img src='/$url' alt='recipe image'>";
 
+        $content .= "<h4>Preparation :</h4><p>" . $args['recipe']->preparation . "</p>";
+
+        $content .= "<h4>Ingredient :</h4><p>" . $args['recipe']->ingredients_text . "</p>";
+
         $content .= "<h3>Liste des ingredient</h3><ul>";
 
         foreach ($ingredients as $ingredient) {
