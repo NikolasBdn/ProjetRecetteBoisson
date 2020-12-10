@@ -1,5 +1,6 @@
 <?php
 
+use boisson\controllers\IngredientController;
 use boisson\controllers\RecipeController;
 use boisson\utils\AppContainer;
 use boisson\views\ViewRendering;
@@ -42,14 +43,14 @@ $app->get('/', function (Request $request, Response $response, $args) {
 // TODO("faire les controleur et les vue correspondant")
 // Ingredient list
 $app->get('/ingredient', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("wip");
+    $response->getBody()->write(IngredientController::ingredients());
     return $response;
 })->setName('ingredient_list');
 
 // Ingredient item
 $app->get('/ingredient/{id}', function (Request $request, Response $response, $args) {
     // id = $args['id']
-    $response->getBody()->write("wip");
+    $response->getBody()->write(IngredientController::ingredient($args['id']));
     return $response;
 })->setName('ingredient');
 
