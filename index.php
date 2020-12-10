@@ -53,8 +53,14 @@ $app->get('/ingredient/{id}', function (Request $request, Response $response, $a
     return $response;
 })->setName('ingredient');
 
-// TODO("faire les controleur et les vue correspondant")
-// Recipe
+// Recipe List
+$app->get('/recipe', function (Request $request, Response $response, $args) {
+    global $app;
+    $response->getBody()->write(RecipeController::recipeList($app));
+    return $response;
+})->setName('recipe_list');
+
+// Recipe Item
 $app->get('/recipe/{id}', function (Request $request, Response $response, $args) {
     global $app;
     $response->getBody()->write(RecipeController::recipe($app , $args['id']));

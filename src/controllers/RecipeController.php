@@ -17,4 +17,10 @@ class RecipeController
         );
         return RecipeView::render($app, $arg);
     }
+
+
+    public static function recipeList($app) {
+        $recipe = Recette::get();
+        return RecipeView::renderList($app, $recipe);
+    }
 }
