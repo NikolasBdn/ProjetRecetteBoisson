@@ -24,9 +24,7 @@ class RecipeView
         if(file_exists('./' . $url)) $content .= "<img src='/$url' alt='recipe image'>";
 
         $content .= "<h4>Preparation :</h4><p>" . $args['recipe']->preparation . "</p>";
-
         $content .= "<h4>Ingredient :</h4><p>" . $args['recipe']->ingredients_text . "</p>";
-
         $content .= "<h3>Liste des ingredient</h3><ul>";
 
         foreach ($ingredients as $ingredient) {
@@ -49,15 +47,17 @@ class RecipeView
         $contentArray = array('title' => 'List des recette');
         $app = AppContainer::getInstance();
 
-        $content = "<h2>" . $contentArray['title'] . "</h2><ul>";
+        $content = "<div id='lists'><h1>" . $contentArray['title'] . "</h1>";
+
+        $content .= "<table>";
 
         foreach ($recipes as $recipe) {
             $name = $recipe->title;
             $url = $app->getRouteCollector()->getRouteParser()->urlFor('recipe', array('id' => $recipe->id));
-            $content .= "<li><a href='$url'>$name</a></li>";
+            $content .= "<tr><th><a href='$url' class='link'>$name</a></th></tr>";
         }
 
-        $contentArray['body'] = $content . "</ul>";
+        $contentArray['body'] = $content . "</table></div>";
 
         return (new ViewRendering())->render($contentArray);
     }
