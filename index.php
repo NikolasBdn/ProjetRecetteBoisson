@@ -1,5 +1,6 @@
 <?php
 
+use boisson\views\ViewRendering;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -28,7 +29,7 @@ $db->bootEloquent();
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
 
-
+// Temporary test
 $ingredients = \boisson\models\Recette::where('id', '=', 0)->first()->ingredients()->get();
 foreach ($ingredients as $ingredient) {
     echo $ingredient->name . "\n";
@@ -39,7 +40,7 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // creation d'un chemin
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello, world");
+    $response->getBody()->write((new ViewRendering())->render("Hello, world!", "Home page"));
     return $response;
 });
 
