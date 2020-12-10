@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Recette Boisson${title}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Recette Boisson{title}</title>
+    <link href ="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    ${body}
+<header id="header">
+    <div id="header-inner">
+        <div id="logo">
+            <h1><a href=$accueil>Recette<span>Boisson</span></a></h1>
+        </div>
+        <div id="top-nav">
+            <ul>
+                ${top_nav}
+            </ul>
+        </div>
+        <div class="clr"></div>
+    </div>
+</header>
+
+${body}
+
+<footer id="footer">
+    <div id="footer-inner">
+        <p>Copyright - Recette Boisson Project - Pierre MARCOLET, Nicolas Baudon</p>
+        <p><a href=${home_link}>Accueil</a> &#124; <a href="#">CGU</a> &#124; <a href="#">CGV</a></p>
+        <div class="clr"></div>
+    </div>
+</footer>
+
 </body>
 </html>

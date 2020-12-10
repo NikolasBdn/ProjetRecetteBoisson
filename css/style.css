@@ -1,0 +1,410 @@
+html{
+    padding:0; margin:0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: #959595;
+    font: normal 12px/2.0em Sans-Serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: darkslateblue;
+}
+#header, #footer, #top-nav, #content, #content #contentbar, #content #sidebar {
+    margin: 0;
+    padding: 0;
+}
+
+.tooltip {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip #tooltip_text {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip #tooltip_text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover #tooltip_text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.gravatar {
+    border-radius: 100%;
+    width: 96px;
+}
+
+input[type=checkbox].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left: 23px;
+    height: 18px;
+    display: inline-block;
+    line-height: 18px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 14px;
+    vertical-align: middle;
+    cursor: pointer;
+
+}
+
+.css-label a {
+    color: darkslateblue;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -18px;
+}
+label.css-label {
+    background-image: url(http://csscheckbox.com/checkboxes/u/csscheckbox_001aa7bf6327f8fac80e0eb160776ef4.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#myLists, #listsByOthers, #edit {
+    border-radius: 12px;
+    background: rgba(107, 161, 255, 0.51);
+    color: darkslateblue;
+    margin: 2% 6%;
+    padding: 1%;
+    width: 84%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+#authors, #items {
+    display: inline-block;
+}
+
+#authors {
+    border-radius: 12px;
+    background: rgba(107, 161, 255, 0.51);
+    color: darkslateblue;
+    padding: 1%;
+    margin-left: 6%;
+    margin-top: 6%;
+    margin-right: 4%;
+    text-align: center;
+}
+
+#authors img {
+    width: 64px;
+}
+
+.owner {
+    width: 62px;
+    border-color: goldenrod;
+    border-style: solid;
+    border-width: 2px;
+}
+
+#items {
+    border-radius: 12px;
+    background: rgba(107, 161, 255, 0.51);
+    color: darkslateblue;
+    margin-top: 6%;
+    margin-left: 0;
+    margin-right: 4%;
+    padding: 1%;
+    max-width: 69%;
+    vertical-align: top;
+}
+
+.link {
+    text-decoration: none;
+    color: blueviolet;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+tr:nth-child(n){
+    background-color: rgba(115, 156, 255, 0.31)
+}
+
+th {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=date], input[type=number], input[type=url] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid darkslateblue;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type=submit], button[type=button] {
+    width: 100%;
+    background-color: darkslateblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type=submit], button[type=button]:hover {
+    background-color: #393973;
+}
+
+#delete-button {
+    width: 100%;
+    background-color: #cd0000;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#delete-button:hover {
+    background-color: darkred;
+}
+
+.error-code, .post-code {
+    margin: 4% 10% 16%;
+    padding: 2%;
+    background: rgba(107, 161, 255, 0.51);
+    color: darkslateblue;
+}
+
+#user-form {
+    text-align: center;
+}
+
+.user-form {
+    border-radius: 12px;
+    background: rgba(107, 161, 255, 0.51);
+    color: darkslateblue;
+    margin: 2% 6%;
+    padding: 2%;
+    width: 32%;
+    vertical-align: top;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Logo */
+#logo {
+    padding: 0;
+    width: auto;
+    float: left;
+}
+#logo h1 a, h1 a:hover {
+    color: darkslateblue;
+    text-decoration: none;
+}
+#logo h1 span {
+    color: #8e3ed2;
+}
+
+/* Header */
+#header {
+    background: cornflowerblue;
+}
+#header-inner {
+    margin: 0 auto;
+    padding: 0;
+    width: 970px;
+}
+
+/* Feature */
+.feature {
+    background: royalblue;
+    padding: 18px;
+}
+
+.feature-inner {
+    margin: auto;
+    width: 970px;
+}
+.feature-inner h1 {
+    color: #f8dbdb;
+    font-size: 32px;
+}
+
+/* Menu */
+#top-nav {
+    margin: 0 auto;
+    padding: 0 0 0;
+    height: 37px;
+    float: right;
+}
+#top-nav ul {
+    list-style: none;
+    padding: 0;
+    height: 37px;
+    float: left;
+}
+#top-nav ul li {
+    margin: 0;
+    padding: 0 0 0 8px;
+    float: left;
+}
+#top-nav ul li a {
+    display: block;
+    margin: 0;
+    padding: 8px 20px;
+    color: darkslateblue;
+    text-decoration: none;
+}
+#top-nav ul li.active a, #top-nav ul li a:hover {
+    color: #f8dbdb;
+}
+
+/* Content */
+#content-inner {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 970px;
+    background: #fff;
+}
+#content #contentbar {
+    margin: 0;
+    padding: 0;
+    float: right;
+    width: 760px;
+}
+#content #contentbar .article {
+    margin: 0 0 24px;
+    padding: 0 20px 0 15px;
+}
+#content #sidebar {
+    padding: 0;
+    float: left;
+    width: 200px;
+}
+#content #sidebar .widget {
+    margin: 0 0 12px;
+    padding: 8px 8px 8px 13px;
+    line-height: 1.4em;
+}
+#content #sidebar .widget h3 a {
+    text-decoration: none;
+}
+#content #sidebar .widget ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #959595;
+}
+#content #sidebar .widget ul li {
+    margin:0;
+}
+#content #sidebar .widget ul li {
+    padding: 4px 0;
+    width: 185px;
+}
+#content #sidebar .widget ul li a {
+    color: cornflowerblue;
+    text-decoration: none;
+    margin-left: -16px;
+    padding: 4px 8px 4px 16px;
+}
+#content #sidebar .widget ul li a:hover {
+    color: #f8dbdb;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* Footerblurb */
+#footerblurb {
+    background: rgba(107, 161, 255, 0.51);
+    color: darkslateblue;
+}
+#footerblurb-inner {
+    margin: 0 auto;
+    width: 922px;
+    padding: 24px;
+}
+#footerblurb .column {
+    margin: 0;
+    text-align: justify;
+    float: left;
+    width: 250px;
+    padding: 0 24px;}
+
+/* Footer */
+#footer {
+    background: #fff;
+}
+#footer-inner {
+    margin: auto;
+    text-align: center;
+    padding: 12px;
+    width: 922px;
+}
+#footer a {
+    color: darkslateblue;
+    text-decoration: none;
+}
+
+/* Clear both sides to assist with div alignment  */
+.clr {
+    clear: both;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-size: 0;
+    line-height: 0;
+}
+
+.img {
+    max-width: 75px;
+    max-height: 75px;
+}

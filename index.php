@@ -1,10 +1,10 @@
 <?php
 
 use boisson\controllers\RecipeController;
+use boisson\utils\AppContainer;
 use boisson\views\ViewRendering;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
 use \Illuminate\Database\Capsule\Manager as DB;
 
 require __DIR__ . '/vendor/autoload.php';
@@ -27,7 +27,7 @@ $db->setAsGlobal();
 $db->bootEloquent();
 
 // Creation du route slim
-$app = AppFactory::create();
+$app = AppContainer::getInstance();
 $app->addRoutingMiddleware();
 
 // gestion des erreurs
@@ -55,15 +55,13 @@ $app->get('/ingredient/{id}', function (Request $request, Response $response, $a
 
 // Recipe List
 $app->get('/recipe', function (Request $request, Response $response, $args) {
-    global $app;
-    $response->getBody()->write(RecipeController::recipeList($app));
+    $response->getBody()->write(RecipeController::recipeList());
     return $response;
 })->setName('recipe_list');
 
 // Recipe Item
 $app->get('/recipe/{id}', function (Request $request, Response $response, $args) {
-    global $app;
-    $response->getBody()->write(RecipeController::recipe($app , $args['id']));
+    $response->getBody()->write(RecipeController::recipe($args['id']));
     return $response;
 })->setName('recipe');
 

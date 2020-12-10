@@ -4,6 +4,10 @@
 namespace boisson\views;
 
 
+use boisson\utils\AppContainer;
+use Slim\App;
+use Slim\Factory\AppFactory;
+
 /**
  * Class ViewRendering
  * @package boisson\views
@@ -12,7 +16,7 @@ class ViewRendering
 {
 
     /**
-     * @param $content array Containing the body and the title
+     * @param $content mixed Containing the body and the title
      * @return string The page who get send to the client
      */
     private static function render1($content)
@@ -21,13 +25,14 @@ class ViewRendering
     }
 
     /**
-     * @param $body string The body of the page
-     * @param $title string The title of the page
+     * @param $body mixed The body of the page
+     * @param $title mixed The title of the page
      * @return string The page who get send to the client
      */
     private static function render2($body, $title)
     {
         $template = file_get_contents('./html/template.html');
+        $app = AppContainer::getInstance();
 
         if (!$title == "") {
             $template = str_replace_first('${title}', " - $title", $template);
@@ -35,6 +40,8 @@ class ViewRendering
             $template = str_replace_first('${title}', "", $template);
         }
         $template = str_replace_first('${body}', $body, $template);
+
+        $template = str_replace_first('${home_link}', '"' . $app->getRouteCollector()->getRouteParser()->urlFor('root') . '"', $template);
 
         return $template;
     }

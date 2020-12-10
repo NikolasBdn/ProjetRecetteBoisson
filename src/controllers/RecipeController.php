@@ -6,7 +6,6 @@ namespace boisson\controllers;
 
 use boisson\models\Recette;
 use boisson\views\RecipeView;
-use Slim\App;
 
 /**
  * Class RecipeController
@@ -16,26 +15,24 @@ class RecipeController
 {
     /**
      * Get the page of a recipe
-     * @param $app App slim instance
      * @param $id string id of the recipe
      * @return mixed The page who get send to the client
      */
-    public static function recipe($app, $id) {
+    public static function recipe($id) {
         $recipe = Recette::where('id', '=', $id)->first();
         $arg = array(
             'recipe' => $recipe,
             'ingredient' => $recipe->ingredients()->get()
         );
-        return RecipeView::render($app, $arg);
+        return RecipeView::render($arg);
     }
 
     /**
      * Get a list with all recipes
-     * @param $app App slim instance
      * @return mixed The page who get send to the client
      */
-    public static function recipeList($app) {
+    public static function recipeList() {
         $recipe = Recette::get();
-        return RecipeView::renderList($app, $recipe);
+        return RecipeView::renderList($recipe);
     }
 }
