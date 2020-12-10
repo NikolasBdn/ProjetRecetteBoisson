@@ -35,24 +35,25 @@ ProjetRecetteBoisson est un projet universitaire composé de :
 ## Niveau 1
 
 + [x] **~~1 - Base de donnée (Recettes, Ingredients, Hierarchie)~~ [Pierre]**
-+ [ ] 2 - Afficher une liste des ingredients
-+ [ ] 3 - Integrer la hierarchie sur les ingredients
-+ [ ] 4 - Afficher une liste des recettes
++ [ ] **2 - Afficher une liste des ingredients [Nicolas]**
++ [ ] **3 - Afficher un ingredient [Nicolas]**
++ [x] **~~4 - Afficher une liste des recettes~~ [Pierre]**
++ [x] **~~5 - Afficher une recette~~ [Pierre]**
 
 ## Niveau 2
 
-+ [ ] 5 - Inclure une photo avec la recette (si elle existe)
-+ [ ] 6 - Creation d'un panier (liste de recette preferé)
-+ [ ] 7 - Ajout de recette au panier
-+ [ ] 8 - Suppression de recette au panier
++ [ ] 6 - Inclure une photo avec la recette (si elle existe)
++ [ ] 7 - Creation d'un panier (liste de recette preferé)
++ [ ] 8 - Ajout de recette au panier
++ [ ] 9 - Suppression de recette au panier
 
 ## Niveau 3
 
-+ [ ] 9 - Base de donnée (Utilisateur)
-+ [ ] 10 - Créer un compte
-+ [ ] 11 - S'authentifier
++ [ ] 10 - Base de donnée (Utilisateur)
++ [ ] 11 - Créer un compte
++ [ ] 12 - S'authentifier
 
 ## Niveau 4
 
-+ [ ] 12 - Barre de recherche
-+ [ ] 13 - Autocomplétion de la barre de recherche
++ [ ] 13 - Barre de recherche
++ [ ] 14 - Autocomplétion de la barre de recherche
