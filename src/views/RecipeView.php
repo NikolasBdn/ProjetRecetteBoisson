@@ -3,8 +3,17 @@
 
 namespace boisson\views;
 
+use Illuminate\Database\Eloquent\Model;
+use Slim\App;
+
 class RecipeView
 {
+    /**
+     * Build the page of a recipe
+     * @param $app App slim instance
+     * @param $args array List of element needed to build the page
+     * @return mixed The page who get send to the client
+     */
     public static function render($app, $args) {
         $contentArray = array('title' => $args['recipe']->title);
 
@@ -27,7 +36,12 @@ class RecipeView
         return (new ViewRendering())->render($contentArray);
     }
 
-
+    /**
+     * Build the page list with all recipes
+     * @param $app App slim instance
+     * @param $recipes Model List of element needed to build the page
+     * @return mixed The page who get send to the client
+     */
     public static function renderList($app, $recipes) {
         $contentArray = array('title' => 'List des recette');
         $content = "<h2>" . $contentArray['title'] . "</h2><ul>";

@@ -4,14 +4,27 @@
 namespace boisson\views;
 
 
+/**
+ * Class ViewRendering
+ * @package boisson\views
+ */
 class ViewRendering
 {
 
+    /**
+     * @param $content array Containing the body and the title
+     * @return string The page who get send to the client
+     */
     private static function render1($content)
     {
         return self::render2($content['body'], $content['title']);
     }
 
+    /**
+     * @param $body string The body of the page
+     * @param $title string The title of the page
+     * @return string The page who get send to the client
+     */
     private static function render2($body, $title)
     {
         $template = file_get_contents('./html/template.html');
@@ -26,6 +39,11 @@ class ViewRendering
         return $template;
     }
 
+    /**
+     * @param $name string name of the function
+     * @param $arguments array argument of the function
+     * @return mixed Return the corresponding function `render1` or  `render2`
+     */
     public function __call($name, $arguments)
     {
         if ($name == 'render') {
