@@ -38,9 +38,25 @@ foreach ($ingredients as $ingredient) {
 // gestion des erreurs
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
-// creation d'un chemin
+// Root
 $app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write((new ViewRendering())->render("Hello, world!", "Home page"));
+    return $response;
+});
+
+// TODO("faire les controleur et les vue correspondant")
+// Ingredient
+$app->get('/ingredient/{id}', function (Request $request, Response $response, $args) {
+    // id = $args['id']
+    $response->getBody()->write("wip");
+    return $response;
+});
+
+// TODO("faire les controleur et les vue correspondant")
+// Recipe
+$app->get('/recipe/{id}', function (Request $request, Response $response, $args) {
+    // id = $args['id']
+    $response->getBody()->write("wip");
     return $response;
 });
 
