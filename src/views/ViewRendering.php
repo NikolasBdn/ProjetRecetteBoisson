@@ -14,7 +14,7 @@ class ViewRendering
 
     private static function render2($body, $title)
     {
-        $template = file_get_contents('./src/views/template.html');
+        $template = file_get_contents('./html/template.html');
 
         if (!$title == "") {
             $template = str_replace_first('${title}', " - $title", $template);

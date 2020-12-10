@@ -6,4 +6,4 @@ composer.lock
 vendor
 # private data
 src/conf/
-Donnees.inc.php
+sql/Donnees.inc.php

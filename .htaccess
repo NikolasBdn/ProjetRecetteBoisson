@@ -5,6 +5,7 @@ RewriteEngine On
 RewriteRule ^sql(/.|)$ - [NC,F]
 RewriteRule ^src(/.|)$ - [NC,F]
 RewriteRule ^vendor(/.*|)$ - [NC,F]
+RewriteRule ^html(/.*|)$ - [NC,F]
 
 #
 # réécriture pour slim
