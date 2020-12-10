@@ -45,7 +45,13 @@ $app->get('/', function (Request $request, Response $response, $args) {
 });
 
 // TODO("faire les controleur et les vue correspondant")
-// Ingredient
+// Ingredient list
+$app->get('/ingredient', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("wip");
+    return $response;
+});
+
+// Ingredient item
 $app->get('/ingredient/{id}', function (Request $request, Response $response, $args) {
     // id = $args['id']
     $response->getBody()->write("wip");
