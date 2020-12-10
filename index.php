@@ -1,5 +1,6 @@
 <?php
 
+use boisson\controllers\RecipeController;
 use boisson\views\ViewRendering;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -42,29 +43,29 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 $app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write((new ViewRendering())->render("Hello, world!", "Home page"));
     return $response;
-});
+})->setName('root');
 
 // TODO("faire les controleur et les vue correspondant")
 // Ingredient list
 $app->get('/ingredient', function (Request $request, Response $response, $args) {
     $response->getBody()->write("wip");
     return $response;
-});
+})->setName('ingredient_list');
 
 // Ingredient item
 $app->get('/ingredient/{id}', function (Request $request, Response $response, $args) {
     // id = $args['id']
     $response->getBody()->write("wip");
     return $response;
-});
+})->setName('ingredient');
 
 // TODO("faire les controleur et les vue correspondant")
 // Recipe
 $app->get('/recipe/{id}', function (Request $request, Response $response, $args) {
-    // id = $args['id']
-    $response->getBody()->write("wip");
+    global $app;
+    $response->getBody()->write(RecipeController::recipe($app , $args['id']));
     return $response;
-});
+})->setName('recipe');
 
 // demarais le routeur
 $app->run();
