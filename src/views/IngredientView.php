@@ -21,23 +21,20 @@ class IngredientView
     {
         $app = AppContainer::getInstance();
 
-        $content = "<h2>" . $args['ingredient']->name . "</h2>";
-        $content .= "<h3>Super Catégories</h3>";
-        $content .= "<ul>";
+        $content = "<div id='items'><h1>" . $args['ingredient']->name . "</h1>";
+        $content .= "<h3>Super Catégories</h3><p>";
 
         foreach ($args['sup_categorys'] as $sup) {
             $urlSup = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient', array('id' => $sup->id));
-            $content .= "<li><a href='$urlSup'>" . $sup->name . "</a></li>";
+            $content .= "<a class='list_item' href='$urlSup'>" . $sup->name . "</a>";
         }
-        $content .= "</ul>";
-        $content .= "<h3>Sous Catégories</h3>";
-        $content .= "<ul>";
+        $content .= "</p><h3>Sous Catégories</h3><p>";
 
         foreach ($args['sub_categorys'] as $sub) {
             $urlSub = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient', array('id' => $sub->id));
-            $content .= "<li><a href='$urlSub'>" . $sub->name . "</li>";
+            $content .= "<a class='list_item' href='$urlSub'>" . $sub->name . "</a>";
         }
-        $content .= "</ul>";
+        $content .= "</p></div>";
         return (new ViewRendering())->render($content, $args['ingredient']->name);
     }
 }
