@@ -5,8 +5,6 @@ namespace boisson\views;
 
 
 use boisson\utils\AppContainer;
-use Slim\App;
-use Slim\Factory\AppFactory;
 
 /**
  * Class ViewRendering
@@ -15,7 +13,20 @@ use Slim\Factory\AppFactory;
 class ViewRendering
 {
 
-    /**
+    private static function createNavBar()
+    {
+        $app = AppContainer::getInstance();
+        $ingredient_list = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient_list');
+        $recipe_list = $app->getRouteCollector()->getRouteParser()->urlFor('recipe_list');
+        return <<<html
+<li><a href=$ingredient_list>Listes ingredient</a></li>
+<li><a href=$recipe_list>Listes recette</a></li>
+<li><a href="#">Pannier</a></li>
+<li><a href="#">S'inscrire/Se Connecter</a></li>
+html;
+    }
+
+        /**
      * @param $content mixed Containing the body and the title
      * @return string The page who get send to the client
      */
@@ -23,6 +34,7 @@ class ViewRendering
     {
         return self::render2($content['body'], $content['title']);
     }
+
 
     /**
      * @param $body mixed The body of the page
@@ -41,7 +53,10 @@ class ViewRendering
         }
         $template = str_replace_first('${body}', $body, $template);
 
-        $template = str_replace_first('${home_link}', '"' . $app->getRouteCollector()->getRouteParser()->urlFor('root') . '"', $template);
+        $count = 2;
+        $template = str_replace('${home_link}', '"' . $app->getRouteCollector()->getRouteParser()->urlFor('root') . '"', $template, $count);
+
+        $template = str_replace_first('${top_nav}', self::createNavBar(), $template);
 
         return $template;
     }
@@ -51,7 +66,7 @@ class ViewRendering
      * @param $arguments array argument of the function
      * @return mixed Return the corresponding function `render1` or  `render2`
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments)
     {
         if ($name == 'render') {
             if (count($arguments) == 1) {
@@ -60,5 +75,6 @@ class ViewRendering
                 return call_user_func_array(array($this, 'render2'), $arguments);
             }
         }
+        return null;
     }
 }
