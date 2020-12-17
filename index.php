@@ -2,11 +2,13 @@
 
 use boisson\controllers\IngredientController;
 use boisson\controllers\RecipeController;
+use boisson\controllers\CartController;
 use boisson\utils\AppContainer;
 use boisson\views\ViewRendering;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use \Illuminate\Database\Capsule\Manager as DB;
+use Slim\Routing\RouteContext;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -36,12 +38,11 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Root
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write((new ViewRendering())->render("Hello, world!", "Home page"));
+    $response->getBody()->write((new ViewRendering())->render("Hello, world!".$_COOKIE['cart'], "Home page"));
     return $response;
 })->setName('root');
 
-// TODO("faire les controleur et les vue correspondant")
-// Ingredient list
+// Ingredient List
 $app->get('/ingredient', function (Request $request, Response $response, $args) {
     $response->getBody()->write(IngredientController::ingredients());
     return $response;
@@ -65,6 +66,30 @@ $app->get('/recipe/{id}', function (Request $request, Response $response, $args)
     $response->getBody()->write(RecipeController::recipe($args['id']));
     return $response;
 })->setName('recipe');
+
+// Cart List
+$app->get('/cart', function (Request $request, Response $response, $args) {
+    $response->getBody()->write(CartController::cart());
+    return $response;
+})->setName('cart');
+
+// Add recipe to Cart
+$app->get('/cart/add/{id}', function (Request $request, Response $response, $args) {
+    $app = AppContainer::getInstance();
+    CartController::add($args['id']);
+    $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+    $url = $routeParser->urlFor('recipe', array('id' => $args['id']));
+    return $app->getresponseFactory()->createResponse()->withHeader('Location', $url)->withStatus(302);
+})->setName('cart_add_recipe');
+
+// Delete recipe to Cart
+$app->get('/cart/delete/{id}', function (Request $request, Response $response, $args) {
+    $app = AppContainer::getInstance();
+    CartController::delete($args['id']);
+    $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+    $url = $routeParser->urlFor('recipe', array('id' => $args['id']));
+    return $app->getresponseFactory()->createResponse()->withHeader('Location', $url)->withStatus(302);
+})->setName('cart_add_recipe');
 
 // demarais le routeur
 $app->run();

@@ -33,6 +33,11 @@ class RecipeView
             $content .= "<a class='list_item' href='$url'>$name</a>";
         }
 
+        if (isset($_COOKIE['cart']) && in_array($args['recipe']->id, json_decode($_COOKIE['cart']))) {
+            $content .= "<br><a href='/cart/delete/".$args['recipe']->id."'>Supprimer du panier</a>";
+        }else {
+            $content .= "<br><a href='/cart/add/".$args['recipe']->id."'>Ajouter au panier</a>";
+        }
         $contentArray['body'] = $content . "</p></div>";
 
         return (new ViewRendering())->render($contentArray);

@@ -18,10 +18,11 @@ class ViewRendering
         $app = AppContainer::getInstance();
         $ingredient_list = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient_list');
         $recipe_list = $app->getRouteCollector()->getRouteParser()->urlFor('recipe_list');
+        $cart = $app->getRouteCollector()->getRouteParser()->urlFor('cart');
         return <<<html
 <li><a href=$ingredient_list>Listes ingredient</a></li>
 <li><a href=$recipe_list>Listes recette</a></li>
-<li><a href="#">Pannier</a></li>
+<li><a href="$cart">Pannier</a></li>
 <li><a href="#">S'inscrire/Se Connecter</a></li>
 html;
     }
