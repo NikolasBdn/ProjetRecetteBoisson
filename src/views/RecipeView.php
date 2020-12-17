@@ -45,20 +45,14 @@ class RecipeView
      */
     public static function renderList($recipes) {
         $contentArray = array('title' => 'List des recette');
-        $app = AppContainer::getInstance();
-
         $content = "<div id='lists'><h1>" . $contentArray['title'] . "</h1>";
-
         $content .= "<table>";
-
         foreach ($recipes as $recipe) {
             $name = $recipe->title;
-            $url = $app->getRouteCollector()->getRouteParser()->urlFor('recipe', array('id' => $recipe->id));
-            $content .= "<tr><th><a href='$url' class='link'>$name</a></th></tr>";
+            $js = "showRecipe(".$recipe->id.")";
+            $content .= "<tr onclick=$js><th>$name</th></tr>";
         }
-
         $contentArray['body'] = $content . "</table></div>";
-
         return (new ViewRendering())->render($contentArray);
     }
 }
