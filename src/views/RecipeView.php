@@ -18,22 +18,22 @@ class RecipeView
         $app = AppContainer::getInstance();
 
         $ingredients = $args['ingredient'];
-        $content = "<h2>" . $contentArray['title'] . "</h2>";
+        $content = "<div id='items'><h1>" . $contentArray['title'] . "</h1>";
 
         $url = 'img/' . str_replace(' ', '_', $contentArray['title']) . '.jpg';
-        if(file_exists('./' . $url)) $content .= "<img src='/$url' alt='recipe image'>";
+        if(file_exists('./' . $url)) $content .= "<img class='img' src='/$url' alt='recipe image'>";
 
         $content .= "<h4>Preparation :</h4><p>" . $args['recipe']->preparation . "</p>";
         $content .= "<h4>Ingredient :</h4><p>" . $args['recipe']->ingredients_text . "</p>";
-        $content .= "<h3>Liste des ingredient</h3><ul>";
+        $content .= "<h3>Liste des ingredient</h3><p>";
 
         foreach ($ingredients as $ingredient) {
             $name = $ingredient->name;
             $url = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient', array('id' => $ingredient->id));
-            $content .= "<li><a href='$url'>$name</a></li>";
+            $content .= "<a class='list_item' href='$url'>$name</a>";
         }
 
-        $contentArray['body'] = $content . "</ul>";
+        $contentArray['body'] = $content . "</p></div>";
 
         return (new ViewRendering())->render($contentArray);
     }

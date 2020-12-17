@@ -157,6 +157,28 @@ label.css-label {
     vertical-align: top;
 }
 
+#items p {
+    margin: 2% 6%;
+}
+
+.list_item {
+    text-align: center;
+    padding: 8px;
+    border-radius: 12px;
+    background-color: cornflowerblue;
+    color: white;
+    margin: 2px;
+    text-decoration: none;
+}
+
+#items h4 {
+    margin: 2% 3%;
+}
+
+#items h3 {
+    margin: 2% 2%;
+}
+
 .link {
     text-decoration: none;
     color: blueviolet;
@@ -411,6 +433,10 @@ button[type=submit], button[type=button]:hover {
 }
 
 .img {
-    max-width: 75px;
-    max-height: 75px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 30%;
+    max-height: 30%;
+    border-radius: 24px;
 }
