@@ -109,10 +109,9 @@ $app->get('/api/search/{string}/filter/{filter}', function (Request $request, Re
     return $response->withHeader('Content-Type', 'application/json');
 })->setName('api_search');
 
-
-// search 4 result that match string
+// search 6 result that match string
 $app->get('/api/quick_search/{string}', function (Request $request, Response $response, $args) {
-
+    $response->getBody()->write(ApiController::quickSearch($args['string']));
     return $response->withHeader('Content-Type', 'application/json');
 })->setName('api_quick_search');
 
