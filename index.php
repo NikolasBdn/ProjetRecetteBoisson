@@ -4,6 +4,7 @@ use boisson\controllers\ApiController;
 use boisson\controllers\IngredientController;
 use boisson\controllers\RecipeController;
 use boisson\controllers\CartController;
+use boisson\controllers\SearchController;
 use boisson\utils\AppContainer;
 use boisson\views\ViewRendering;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -95,6 +96,7 @@ $app->get('/cart/delete/{id:[0-9]+}', function (Request $request, Response $resp
 
 // Search page
 $app->post('/search', function (Request $request, Response $response, $args) {
+    $response->getBody()->write(SearchController::search($_POST['search_bar']));
     return $response;
 })->setName('search');
 
