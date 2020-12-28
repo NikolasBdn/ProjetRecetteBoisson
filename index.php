@@ -95,6 +95,25 @@ $app->get('/cart/delete/{id:[0-9]+}', function (Request $request, Response $resp
 
 // Rest api use for search bar
 
+// search all data that match string
+$app->get('/api/search/{string}', function (Request $request, Response $response, $args) {
+
+    return $response->withHeader('Content-Type', 'application/json');
+})->setName('api_search');
+
+// search all data that match string with applying filter
+// filter type: [recipe/ingredient]
+$app->get('/api/search/{string}/filter/{filter}', function (Request $request, Response $response, $args) {
+
+    return $response->withHeader('Content-Type', 'application/json');
+})->setName('api_search');
+
+
+// search 4 result that match string
+$app->get('/api/quick_search/{string}', function (Request $request, Response $response, $args) {
+
+    return $response->withHeader('Content-Type', 'application/json');
+})->setName('api_quick_search');
 
 
 // start router
