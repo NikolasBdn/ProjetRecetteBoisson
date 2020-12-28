@@ -19,7 +19,12 @@ class ViewRendering
         $ingredient_list = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient_list');
         $recipe_list = $app->getRouteCollector()->getRouteParser()->urlFor('recipe_list');
         $cart = $app->getRouteCollector()->getRouteParser()->urlFor('cart');
+        $search = $app->getRouteCollector()->getRouteParser()->urlFor('search');
         return <<<html
+<li><form id="search-form" method="post" action="$search">
+    <input id="search-input" type="text" name="search_bar">
+    <button id="search-button" type="submit" name="submit" value="doSearch">🔍</button>
+</form></li>
 <li><a href=$ingredient_list>Listes ingredient</a></li>
 <li><a href=$recipe_list>Listes recette</a></li>
 <li><a href="$cart">Pannier</a></li>

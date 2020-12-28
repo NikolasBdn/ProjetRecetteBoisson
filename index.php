@@ -93,6 +93,10 @@ $app->get('/cart/delete/{id:[0-9]+}', function (Request $request, Response $resp
     return $app->getresponseFactory()->createResponse()->withHeader('Location', $url)->withStatus(302);
 })->setName('cart_add_recipe');
 
+// Search page
+$app->post('/search', function (Request $request, Response $response, $args) {
+    return $response;
+})->setName('search');
 
 // Rest api use for search bar
 
@@ -107,7 +111,7 @@ $app->get('/api/search/{string}', function (Request $request, Response $response
 $app->get('/api/search/{string}/filter/{filter}', function (Request $request, Response $response, $args) {
     $response->getBody()->write(ApiController::searchForFilteredBy($args['string'], $args['filter']));
     return $response->withHeader('Content-Type', 'application/json');
-})->setName('api_search');
+})->setName('api_search_filter');
 
 // search 6 result that match string
 $app->get('/api/quick_search/{string}', function (Request $request, Response $response, $args) {

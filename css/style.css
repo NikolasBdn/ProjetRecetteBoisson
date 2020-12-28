@@ -231,6 +231,27 @@ button[type=submit], button[type=button]:hover {
     background-color: #393973;
 }
 
+#search-form {
+    text-align: right;
+}
+
+#search-input {
+    width: 80%;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 2px 2px;
+    display: inline-block;
+}
+
+#search-button {
+    width: 12%;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 2px 2px;
+    border: 1px solid darkslateblue;
+    display: inline-block;
+}
+
 #delete-button {
     width: 100%;
     background-color: #cd0000;
