@@ -38,7 +38,8 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Root
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write((new ViewRendering())->render("Hello, world!".$_COOKIE['cart'], "Home page"));
+    //$response->getBody()->write((new ViewRendering())->render("Hello, world!" . $_COOKIE['cart'], "Home page")); // le cookie n'est pas instancié et ça fait crash l'app...
+    $response->getBody()->write((new ViewRendering())->render("Hello, world!", "Home page"));
     return $response;
 })->setName('root');
 
@@ -49,7 +50,7 @@ $app->get('/ingredient', function (Request $request, Response $response, $args) 
 })->setName('ingredient_list');
 
 // Ingredient item
-$app->get('/ingredient/{id}', function (Request $request, Response $response, $args) {
+$app->get('/ingredient/{id:[0-9]+}', function (Request $request, Response $response, $args) {
     // id = $args['id']
     $response->getBody()->write(IngredientController::ingredient($args['id']));
     return $response;
@@ -62,7 +63,7 @@ $app->get('/recipe', function (Request $request, Response $response, $args) {
 })->setName('recipe_list');
 
 // Recipe Item
-$app->get('/recipe/{id}', function (Request $request, Response $response, $args) {
+$app->get('/recipe/{id:[0-9]+}', function (Request $request, Response $response, $args) {
     $response->getBody()->write(RecipeController::recipe($args['id']));
     return $response;
 })->setName('recipe');
@@ -74,7 +75,7 @@ $app->get('/cart', function (Request $request, Response $response, $args) {
 })->setName('cart');
 
 // Add recipe to Cart
-$app->get('/cart/add/{id}', function (Request $request, Response $response, $args) {
+$app->get('/cart/add/{id:[0-9]+}', function (Request $request, Response $response, $args) {
     $app = AppContainer::getInstance();
     CartController::add($args['id']);
     $routeParser = RouteContext::fromRequest($request)->getRouteParser();
@@ -83,7 +84,7 @@ $app->get('/cart/add/{id}', function (Request $request, Response $response, $arg
 })->setName('cart_add_recipe');
 
 // Delete recipe to Cart
-$app->get('/cart/delete/{id}', function (Request $request, Response $response, $args) {
+$app->get('/cart/delete/{id:[0-9]+}', function (Request $request, Response $response, $args) {
     $app = AppContainer::getInstance();
     CartController::delete($args['id']);
     $routeParser = RouteContext::fromRequest($request)->getRouteParser();
@@ -91,5 +92,10 @@ $app->get('/cart/delete/{id}', function (Request $request, Response $response, $
     return $app->getresponseFactory()->createResponse()->withHeader('Location', $url)->withStatus(302);
 })->setName('cart_add_recipe');
 
-// demarais le routeur
+
+// Rest api use for search bar
+
+
+
+// start router
 $app->run();
