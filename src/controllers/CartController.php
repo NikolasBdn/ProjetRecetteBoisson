@@ -11,11 +11,14 @@ use boisson\utils\AppContainer;
 class CartController
 {
   public static function cart() {
-      $cart = json_decode($_COOKIE['cart']);
       $arg = array();
-      foreach ($cart as $id) {
-          $recette = Recette::where('id', '=', $id)->first();
-          array_push($arg, $recette);
+
+      if (isset($_COOKIE['cart'])) {
+        $cart = json_decode($_COOKIE['cart']);
+        foreach ($cart as $id) {
+            $recette = Recette::where('id', '=', $id)->first();
+            array_push($arg, $recette);
+        }
       }
       return CartView::render($arg);
   }
