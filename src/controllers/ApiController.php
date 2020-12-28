@@ -44,6 +44,30 @@ class ApiController
         return substr($out, 0, -1) . ']';
     }
 
+    public static function quickSearch(string $elementToSearch)
+    {
+        $filterElementToSearch = filter_var($elementToSearch, FILTER_UNSAFE_RAW);
+
+        $ingredients = Ingredient::select('id', 'name')->where('name', 'like', '%' . $filterElementToSearch . '%')->skip(0)->take(6)->get();
+        $recipes = Recette::select('id', 'title')->where('title', 'like', '%' . $filterElementToSearch . '%')->skip(0)->take(6)->get();
+
+        $nbElement = 0;
+        $out = '[';
+
+        foreach ($ingredients as $ingredient) {
+            $out .= '{"type": "ingredient","id":' . $ingredient->id . ',"name":"' . $ingredient->name . '"},';
+            $nbElement++;
+        }
+
+        foreach ($recipes as $recipe) {
+            if ($nbElement >= 6) break;
+            $out .= '{"type": "recipe","id":' . $recipe->id . ',"name":"' . $recipe->title . '"},';
+            $nbElement++;
+        }
+
+        return substr($out, 0, -1) . ']';
+    }
+
     private static function getIngredients($like) {
         $out = '';
         $ingredients = Ingredient::select('id', 'name')->where('name', 'like', '%' . $like . '%')->get();
