@@ -1,5 +1,6 @@
 <?php
 
+use boisson\controllers\ApiController;
 use boisson\controllers\IngredientController;
 use boisson\controllers\RecipeController;
 use boisson\controllers\CartController;
@@ -97,14 +98,14 @@ $app->get('/cart/delete/{id:[0-9]+}', function (Request $request, Response $resp
 
 // search all data that match string
 $app->get('/api/search/{string}', function (Request $request, Response $response, $args) {
-
+    $response->getBody()->write(ApiController::searchFor($args['string']));
     return $response->withHeader('Content-Type', 'application/json');
 })->setName('api_search');
 
 // search all data that match string with applying filter
 // filter type: [recipe/ingredient]
 $app->get('/api/search/{string}/filter/{filter}', function (Request $request, Response $response, $args) {
-
+    $response->getBody()->write(ApiController::searchForFilteredBy($args['string'], $args['filter']));
     return $response->withHeader('Content-Type', 'application/json');
 })->setName('api_search');
 
