@@ -21,8 +21,8 @@ class ViewRendering
         $cart = $app->getRouteCollector()->getRouteParser()->urlFor('cart');
         $search = $app->getRouteCollector()->getRouteParser()->urlFor('search');
         return <<<html
-<li><form id="search-form" method="post" action="$search">
-    <input id="search-input" type="text" name="search_bar">
+<li><form id="search-form" autocomplete="off" method="post" action="$search">
+    <input id="search-input" autocomplete="off" type="text" name="search_bar">
     <button id="search-button" type="submit" name="submit" value="doSearch">🔍</button>
 </form></li>
 <li><a href=$ingredient_list>Listes ingredient</a></li>

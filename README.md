@@ -56,4 +56,4 @@ ProjetRecetteBoisson est un projet universitaire composé de :
 ## Niveau 4
 
 + [x] **~~13 - Barre de recherche~~ [Pierre]**
-+ [ ] 14 - Autocomplétion de la barre de recherche
++ [x] **~~14 - Autocomplétion de la barre de recherche~~ [Pierre]**

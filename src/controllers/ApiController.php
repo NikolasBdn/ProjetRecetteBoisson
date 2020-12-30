@@ -55,13 +55,13 @@ class ApiController
         $out = '[';
 
         foreach ($ingredients as $ingredient) {
-            $out .= '{"type": "ingredient","id":' . $ingredient->id . ',"name":"' . $ingredient->name . '"},';
+            $out .= '{"type": "ingredient","id":' . $ingredient->id . ',"label":"' . $ingredient->name . '"},';
             $nbElement++;
         }
 
         foreach ($recipes as $recipe) {
             if ($nbElement >= 6) break;
-            $out .= '{"type": "recipe","id":' . $recipe->id . ',"name":"' . $recipe->title . '"},';
+            $out .= '{"type": "recipe","id":' . $recipe->id . ',"label":"' . $recipe->title . '"},';
             $nbElement++;
         }
 
