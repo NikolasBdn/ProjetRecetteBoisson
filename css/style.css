@@ -462,3 +462,12 @@ button[type=submit], button[type=button]:hover {
     max-height: 30%;
     border-radius: 24px;
 }
+
+/* Jquery ui themes/start */
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #5b95ff;
+    background: #80abf5;
+    font-weight: normal;
+    color: #ffffff;
+}
