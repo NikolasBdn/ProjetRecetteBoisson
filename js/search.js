@@ -12,7 +12,7 @@ $(function () {
         });
     }
     input.keyup(() => {
-        if (input.val() !== '') $.getJSON('http://recetteboisson/api/quick_search/' + input.val(), (data) => {
+        if (input.val() !== '') $.getJSON(root + 'api/quick_search/' + input.val(), (data) => {
             createInputAutocomplete(data);
         });
     });

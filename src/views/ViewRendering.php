@@ -59,8 +59,10 @@ html;
         }
         $template = str_replace_first('${body}', $body, $template);
 
-        $count = 2;
-        $template = str_replace('${home_link}', '"' . $app->getRouteCollector()->getRouteParser()->urlFor('root') . '"', $template, $count);
+        $count = 8;
+        $template = str_replace('${home_link}', $app->getRouteCollector()->getRouteParser()->urlFor('root'), $template, $count);
+
+        $template = str_replace_first('${api_link}', $app->getRouteCollector()->getRouteParser()->urlFor('root'), $template);
 
         $template = str_replace_first('${top_nav}', self::createNavBar(), $template);
 

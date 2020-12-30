@@ -4,13 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Recette Boisson${title}</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css">
-    <link href ="/css/style.min.css" rel="stylesheet">
+    <link href ="/css/style.css" rel="stylesheet">
 </head>
 <body>
 <header id="header">
     <div id="header-inner">
         <div id="logo">
-            <h1><a href=${home_link}>Recette<span>Boisson</span></a></h1>
+            <h1><a href="${home_link}">Recette<span>Boisson</span></a></h1>
         </div>
         <div id="top-nav">
             <ul>
@@ -30,13 +30,16 @@
 <footer id="footer">
     <div id="footer-inner">
         <p>Copyright - Recette Boisson Project - Pierre MARCOLET, Nicolas Baudon</p>
-        <p><a href=${home_link}>Accueil</a> &#124; <a href="#">CGU</a> &#124; <a href="#">CGV</a></p>
+        <p><a href="${home_link}">Accueil</a> &#124; <a href="#">CGU</a> &#124; <a href="#">CGV</a></p>
         <div class="clr"></div>
     </div>
 </footer>
-<script src="/js/lists.min.js" type="application/javascript"></script>
+<script src="${home_link}js/lists.js" type="application/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="application/javascript"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="/js/search.min.js" type="application/javascript"></script>
+<script>
+    const root = "${api_link}";
+</script>
+<script src="${home_link}js/search.js" type="application/javascript"></script>
 </body>
 </html>
