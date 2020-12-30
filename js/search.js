@@ -5,16 +5,7 @@ $(function () {
             source: data,
             minLength: 0,
             select: function (event, ui) {
-                switch (ui.item.type) {
-                    case 'ingredient':
-                        showIngredient(ui.item.id);
-                        return false;
-                    case 'recipe':
-                        showRecipe(ui.item.id);
-                        return false;
-                    default:
-                        return false;
-                }
+                window.location.href = ui.item.url;
             }
         }).focus(function () {
             $(this).autocomplete("search");

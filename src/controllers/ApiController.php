@@ -6,6 +6,8 @@ namespace boisson\controllers;
 
 use boisson\models\Ingredient;
 use boisson\models\Recette;
+use boisson\utils\AppContainer;
+use Slim\App;
 
 class ApiController
 {
@@ -46,6 +48,7 @@ class ApiController
 
     public static function quickSearch(string $elementToSearch)
     {
+        $app = AppContainer::getInstance();
         $filterElementToSearch = filter_var($elementToSearch, FILTER_UNSAFE_RAW);
 
         $ingredients = Ingredient::select('id', 'name')->where('name', 'like', '%' . $filterElementToSearch . '%')->skip(0)->take(6)->get();
@@ -55,13 +58,15 @@ class ApiController
         $out = '[';
 
         foreach ($ingredients as $ingredient) {
-            $out .= '{"type": "ingredient","id":' . $ingredient->id . ',"label":"' . $ingredient->name . '"},';
+            $url = $app->getRouteCollector()->getRouteParser()->urlFor('ingredient', array('id' => $ingredient->id));
+            $out .= '{"label":"' . $ingredient->name . '","url":"' . $url . '"},';
             $nbElement++;
         }
 
         foreach ($recipes as $recipe) {
             if ($nbElement >= 6) break;
-            $out .= '{"type": "recipe","id":' . $recipe->id . ',"label":"' . $recipe->title . '"},';
+            $url = $app->getRouteCollector()->getRouteParser()->urlFor('recipe', array('id' => $recipe->id));
+            $out .= '{"label":"' . $recipe->title . '","url":"' . $url . '"},';
             $nbElement++;
         }
 

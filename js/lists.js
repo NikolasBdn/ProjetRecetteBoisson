@@ -10,10 +10,10 @@ function __buildUrl(id, type) {
     if (window.location.href.includes('search')) {
         switch (type) {
             case 0:
-                window.location.href = window.location.href.replace('search', 'recipe').replace('ingredient', 'recipe') + '/' + id;
+                window.location.href = window.location.href.replace('search', 'recipe') + '/' + id;
                 break;
             case 1:
-                window.location.href = window.location.href.replace('search', 'ingredient').replace('recipe', 'ingredient') + '/' + id;
+                window.location.href = window.location.href.replace('search', 'ingredient') + '/' + id;
                 break;
         }
     } else {
