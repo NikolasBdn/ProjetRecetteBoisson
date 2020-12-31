@@ -31,8 +31,7 @@ class ApiController
 
         $out = '[';
 
-        switch ($filterSearchFilter)
-        {
+        switch ($filterSearchFilter) {
             case 'ingredient':
                 $out .= self::getIngredients($filterElementToSearch);
                 break;
@@ -73,14 +72,16 @@ class ApiController
         return substr($out, 0, -1) . ']';
     }
 
-    private static function getIngredients($like) {
+    private static function getIngredients($like)
+    {
         $out = '';
         $ingredients = Ingredient::select('id', 'name')->where('name', 'like', '%' . $like . '%')->get();
         foreach ($ingredients as $ingredient) $out .= '{"type": "ingredient","id":' . $ingredient->id . ',"name":"' . $ingredient->name . '"},';
         return $out;
     }
 
-    private static function getRecipes($like) {
+    private static function getRecipes($like)
+    {
         $out = '';
         $recipes = Recette::select('id', 'title')->where('title', 'like', '%' . $like . '%')->get();
         foreach ($recipes as $recipe) $out .= '{"type": "recipe","id":' . $recipe->id . ',"name":"' . $recipe->title . '"},';

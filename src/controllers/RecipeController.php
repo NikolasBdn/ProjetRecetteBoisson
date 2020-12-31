@@ -18,7 +18,8 @@ class RecipeController
      * @param $id string id of the recipe
      * @return mixed The page who get send to the client
      */
-    public static function recipe($id) {
+    public static function recipe($id)
+    {
         $recipe = Recette::where('id', '=', $id)->first();
         $arg = array(
             'recipe' => $recipe,
@@ -31,7 +32,8 @@ class RecipeController
      * Get a list with all recipes
      * @return mixed The page who get send to the client
      */
-    public static function recipeList() {
+    public static function recipeList()
+    {
         $recipe = Recette::get();
         return RecipeView::renderList($recipe);
     }

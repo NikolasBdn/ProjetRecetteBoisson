@@ -97,7 +97,7 @@ $app->get('/cart/delete/{id:[0-9]+}', function (Request $request, Response $resp
     $routeParser = RouteContext::fromRequest($request)->getRouteParser();
     $url = $routeParser->urlFor('recipe', array('id' => $args['id']));
     return $app->getresponseFactory()->createResponse()->withHeader('Location', $url)->withStatus(302);
-})->setName('cart_add_recipe');
+})->setName('cart_delete_recipe');
 
 // Search page
 $app->post('/search', function (Request $request, Response $response, $args) {

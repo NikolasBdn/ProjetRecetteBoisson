@@ -4,9 +4,7 @@ create table User (
     primary key (username)
 );
 
-create table basket(
+create table basket (
     username varchar(64),
-    recipe   int,
-    constraint fk_recipe foreign key (recipe) references Recette (id),
-    constraint fk_username foreign key (username) references User (username)
+    recipe   int
 );

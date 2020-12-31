@@ -3,6 +3,7 @@
 
 namespace boisson\views;
 
+use boisson\controllers\CartController;
 use boisson\utils\AppContainer;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,8 @@ class RecipeView
      * @param $args array List of element needed to build the page
      * @return mixed The page who get send to the client
      */
-    public static function render($args) {
+    public static function render($args)
+    {
         $contentArray = array('title' => $args['recipe']->title);
         $app = AppContainer::getInstance();
 
@@ -21,7 +23,7 @@ class RecipeView
         $content = "<div id='items'><h1>" . $contentArray['title'] . "</h1>";
 
         $url = 'img/' . str_replace(' ', '_', $contentArray['title']) . '.jpg';
-        if(file_exists('./' . $url)) $content .= "<img class='img' src='/$url' alt='recipe image'>";
+        if (file_exists('./' . $url)) $content .= "<img class='img' src='/$url' alt='recipe image'>";
 
         $content .= "<h4>Preparation :</h4><p>" . $args['recipe']->preparation . "</p>";
         $content .= "<h4>Ingredient :</h4><p>" . $args['recipe']->ingredients_text . "</p>";
@@ -33,12 +35,19 @@ class RecipeView
             $content .= "<a class='list_item' href='$url'>$name</a>";
         }
 
-        if (isset($_COOKIE['cart']) && in_array($args['recipe']->id, json_decode($_COOKIE['cart']))) {
-            $content .= "<br><a href='/cart/delete/".$args['recipe']->id."'>Supprimer du panier</a>";
-        }else {
-            $content .= "<br><a href='/cart/add/".$args['recipe']->id."'>Ajouter au panier</a>";
+        $content .= "</p>";
+
+        if (CartController::isInCart($args['recipe']->id)) {
+            $url = $app->getRouteCollector()->getRouteParser()->urlFor('cart_delete_recipe', array('id' => $args['recipe']->id));
+            $content .= '<form method="get" action="' . $url . '"><button type="submit" name="delete">Supprimer du panier</button></form>';
+        } else {
+            //$content .= "<br><a href='/cart/add/".$args['recipe']->id."'>Ajouter au panier</a>";
+
+            $url = $app->getRouteCollector()->getRouteParser()->urlFor('cart_add_recipe', array('id' => $args['recipe']->id));
+            $content .= '<form method="get" action="' . $url . '"><button type="submit" name="add">Ajouter au panier</button></form>';
         }
-        $contentArray['body'] = $content . "</p></div>";
+
+        $contentArray['body'] = $content . "</div>";
 
         return (new ViewRendering())->render($contentArray);
     }
@@ -48,13 +57,14 @@ class RecipeView
      * @param $recipes Model List of element needed to build the page
      * @return mixed The page who get send to the client
      */
-    public static function renderList($recipes) {
+    public static function renderList($recipes)
+    {
         $contentArray = array('title' => 'List des recette');
         $content = "<div id='lists'><h1>" . $contentArray['title'] . "</h1>";
         $content .= "<table>";
         foreach ($recipes as $recipe) {
             $name = $recipe->title;
-            $js = "showRecipe(".$recipe->id.")";
+            $js = "showRecipe(" . $recipe->id . ")";
             $content .= "<tr onclick=$js><th>$name</th></tr>";
         }
         $contentArray['body'] = $content . "</table></div>";

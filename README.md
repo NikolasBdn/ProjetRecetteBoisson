@@ -43,9 +43,9 @@ ProjetRecetteBoisson est un projet universitaire composé de :
 ## Niveau 2
 
 + [x] **~~6 - Inclure une photo avec la recette (si elle existe)~~ [Pierre]**
-+ [ ] 7 - Creation d'un panier (liste de recette preferé)
-+ [ ] 8 - Ajout de recette au panier
-+ [ ] 9 - Suppression de recette au panier
++ [x] **~~7 - Creation d'un panier (liste de recette preferé)~~ [Nicolas]**
++ [x] **~~8 - Ajout de recette au panier~~ [Nicolas]**
++ [x] **~~9 - Suppression de recette au panier~~ [Nicolas]**
 
 ## Niveau 3
 

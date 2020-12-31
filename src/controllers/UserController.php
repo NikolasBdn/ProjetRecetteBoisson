@@ -29,7 +29,7 @@ class UserController
                 $val = filter_var($_POST['username'], FILTER_DEFAULT);
                 if ($val != FALSE) {
                     $user_data['username'] = $val;
-                } else{
+                } else {
                     return UserView::errorPost();
                 }
             } else {
@@ -42,7 +42,7 @@ class UserController
                 $val = filter_var($_POST['password'], FILTER_DEFAULT);
                 if ($val != FALSE) {
                     $user_data['password'] = $val;
-                } else{
+                } else {
                     return UserView::errorPost();
                 }
             } else {
@@ -55,7 +55,7 @@ class UserController
                 $val = filter_var($_POST['password-confirm'], FILTER_DEFAULT);
                 if ($val != FALSE) {
                     $user_data['password-confirm'] = $val;
-                } else{
+                } else {
                     return UserView::errorPost();
                 }
             } else {
@@ -106,7 +106,7 @@ class UserController
                 $val = filter_var($_POST['password'], FILTER_DEFAULT);
                 if ($val != FALSE) {
                     $user_data['password'] = $val;
-                } else{
+                } else {
                     return UserView::errorPost();
                 }
             } else {
@@ -128,7 +128,8 @@ class UserController
         return UserView::errorPost();
     }
 
-    private static function createSession($username) {
+    private static function createSession($username)
+    {
         $_SESSION['username'] = $username;
     }
 
