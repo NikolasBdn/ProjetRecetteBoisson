@@ -5,6 +5,7 @@ namespace boisson\views;
 
 
 use boisson\utils\AppContainer;
+use boisson\utils\Authentication;
 
 /**
  * Class ViewRendering
@@ -20,15 +21,24 @@ class ViewRendering
         $recipe_list = $app->getRouteCollector()->getRouteParser()->urlFor('recipe_list');
         $cart = $app->getRouteCollector()->getRouteParser()->urlFor('cart');
         $search = $app->getRouteCollector()->getRouteParser()->urlFor('search');
+
+        if (Authentication::isLogging()) {
+            $login_off_link = $app->getRouteCollector()->getRouteParser()->urlFor('login_off');
+            $login = "<li><a href=\"$login_off_link\">Se Deconnecter</a></li>";
+        } else {
+            $login_link = $app->getRouteCollector()->getRouteParser()->urlFor('login_page');
+            $login = "<li><a href=\"$login_link\">S'inscrire/Se Connecter</a></li>";
+        }
+
         return <<<html
 <li><form id="search-form" autocomplete="off" method="post" action="$search">
     <input id="search-input" autocomplete="off" type="text" name="search_bar">
     <button id="search-button" type="submit" name="submit" value="doSearch">🔍</button>
 </form></li>
-<li><a href=$ingredient_list>Listes ingredient</a></li>
-<li><a href=$recipe_list>Listes recette</a></li>
+<li><a href="$ingredient_list">Listes ingredient</a></li>
+<li><a href="$recipe_list">Listes recette</a></li>
 <li><a href="$cart">Pannier</a></li>
-<li><a href="#">S'inscrire/Se Connecter</a></li>
+$login
 html;
     }
 

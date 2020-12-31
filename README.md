@@ -49,9 +49,9 @@ ProjetRecetteBoisson est un projet universitaire composé de :
 
 ## Niveau 3
 
-+ [ ] 10 - Base de donnée (Utilisateur)
-+ [ ] 11 - Créer un compte
-+ [ ] 12 - S'authentifier
++ [x] **~~10 - Base de donnée (Utilisateur)~~ [Pierre]**
++ [x] **~~11 - Créer un compte~~ [Pierre]**
++ [x] **~~12 - S'authentifier~~ [Pierre]**
 
 ## Niveau 4
 

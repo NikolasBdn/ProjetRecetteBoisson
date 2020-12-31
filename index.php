@@ -5,7 +5,9 @@ use boisson\controllers\IngredientController;
 use boisson\controllers\RecipeController;
 use boisson\controllers\CartController;
 use boisson\controllers\SearchController;
+use boisson\controllers\UserController;
 use boisson\utils\AppContainer;
+use boisson\views\UserView;
 use boisson\views\ViewRendering;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -30,6 +32,9 @@ $db->addConnection([
 
 $db->setAsGlobal();
 $db->bootEloquent();
+
+// démarrage d'une session
+session_start();
 
 // Creation du route slim
 $app = AppContainer::getInstance();
@@ -99,6 +104,27 @@ $app->post('/search', function (Request $request, Response $response, $args) {
     $response->getBody()->write(SearchController::search($_POST['search_bar']));
     return $response;
 })->setName('search');
+
+// user
+$app->get('/login', function (Request $request, Response $response, $args) {
+    $response->getBody()->write(UserView::accountRegisterAndLogin());
+    return $response;
+})->setName('login_page');
+
+$app->get('/login/off', function (Request $request, Response $response, $args) {
+    UserController::logout();
+    return $response;
+})->setName('login_off');
+
+$app->post('/register', function (Request $request, Response $response, $args) {
+    $response->getBody()->write(UserController::registerPost());
+    return $response;
+})->setName('register');
+
+$app->post('/login', function (Request $request, Response $response, $args) {
+    $response->getBody()->write(UserController::loginPost());
+    return $response;
+})->setName('login');
 
 // Rest api use for search bar
 
